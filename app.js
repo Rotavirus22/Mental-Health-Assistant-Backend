@@ -6,6 +6,8 @@ const errorHandlers = require("./handlers/errorHandlers");
 
 const {db} = require("./database/firebase");
 const userRoute = require("./users/users.route");
+const predictionRoute = require("./predictions/prediction.route");
+const bodyParser = require('body-parser');
 
 
 require("dotenv").config();
@@ -15,7 +17,10 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/api/users", userRoute);
+app.use("/api/pred",predictionRoute);
 
 db.collection('test').doc('testDoc').set({ initialized: true })
     .then(() => {
