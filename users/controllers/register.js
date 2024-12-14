@@ -30,6 +30,8 @@ const register = async (req, res) => {
       fullName: fullName,
       role: role,
       email: email,
+      verified: "false",
+      documentURL: "",
       password: hashedPassword,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),

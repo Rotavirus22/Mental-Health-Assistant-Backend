@@ -16,7 +16,7 @@ try{
   }
 
 const predictionResponse = await axios.post(
-    "https://mental-health-assistant-ml.onrender.com/predict", // Replace with your prediction API endpoint
+    "http://127.0.0.1:5000/predict", // Replace with your prediction API endpoint
     { responses: responses }
   );
 
