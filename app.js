@@ -8,6 +8,8 @@ const {db} = require("./database/firebase");
 const userRoute = require("./users/users.route");
 const predictionRoute = require("./predictions/prediction.route");
 const bodyParser = require('body-parser');
+const adminRoute = require("./admin/admin.route");
+const doctorRoute = require("./doctors/doctor.route");
 
 
 require("dotenv").config();
@@ -21,6 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoute);
 app.use("/api/pred",predictionRoute);
+app.use("/api/admin",adminRoute);
+app.use("/api/doctor",doctorRoute);
 
 db.collection('test').doc('testDoc').set({ initialized: true })
     .then(() => {

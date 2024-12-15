@@ -11,6 +11,7 @@ const jwtManager = (user) => {
     {
       id: user.userId,
       name: user.fullName,
+      role: user.role,
     },
     process.env.jwt_salt
   );

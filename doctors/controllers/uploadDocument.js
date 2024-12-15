@@ -9,18 +9,20 @@ const uploadDoc = async (req,res) => {
     try{
         const userId = req.user.uid;
 
+
         if (!req.file) {
           return res.status(400).json({
             status: "failed",
             message: "No file uploaded.",
           });
         }
-    
 
         const result = await cloudinary.uploader.upload(req.file.path, {
             resource_type: "raw",
           });
           const pdfData = await pdf(fs.readFileSync(req.file.path));
+
+
 
           const userDocRef = db.collection("users").doc(userId);
           const userDoc = await userDocRef.get();
