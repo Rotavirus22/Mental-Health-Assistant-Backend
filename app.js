@@ -10,6 +10,7 @@ const predictionRoute = require("./predictions/prediction.route");
 const bodyParser = require('body-parser');
 const adminRoute = require("./admin/admin.route");
 const doctorRoute = require("./doctors/doctor.route");
+const subscriptionRoute = require("./subscription/subscription.route");
 
 
 require("dotenv").config();
@@ -25,6 +26,7 @@ app.use("/api/users", userRoute);
 app.use("/api/pred",predictionRoute);
 app.use("/api/admin",adminRoute);
 app.use("/api/doctor",doctorRoute);
+app.use("/api/khalti",subscriptionRoute);
 
 db.collection('test').doc('testDoc').set({ initialized: true })
     .then(() => {

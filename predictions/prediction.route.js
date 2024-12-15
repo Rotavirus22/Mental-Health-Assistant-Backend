@@ -7,6 +7,6 @@ const predictionRoute = express.Router();
 
 predictionRoute.use(auth);
 
-predictionRoute.post("/predict",verifyToken,predictionn)
+predictionRoute.post("/predict",verifyToken,predictionn);
 
 module.exports = predictionRoute;

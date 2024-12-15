@@ -5,13 +5,14 @@ const jwtManager = require("../../managers/jwtManager");
 const {admin, db} = require("../../database/firebase");
 
 const doctorRegister = async (req, res) => {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password ,subscriptionFee} = req.body;
   
     // Validations
     if (!fullName) throw "Full name must be provided";
     if (!password) throw "Password must be provided";
     if (!email) throw "Email must be provided";
     if (password.length < 5) throw "Password must be more than 5 characters";
+    if(!subscriptionFee) throw "Subscription fee is required";
 
     const usersRef = db.collection('users');
     const existingUser = await usersRef.where('email', '==', email).get();
@@ -30,6 +31,7 @@ const doctorRegister = async (req, res) => {
       fullName: fullName,
       role: "doctor",
       email: email,
+      subscriptionFee:subscriptionFee,
       verified: "false",
       documentURL: "",
       password: hashedPassword,
