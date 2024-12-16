@@ -13,7 +13,7 @@ const verifyToken = async (req, res, next) => {
   const token = authHeader.split("Bearer ")[1];
 
   try {
-    const decodedToken = jwt.verify(token, process.env.jwt_salt); // Use the same secret key as used during token generation
+    const decodedToken = jwt.verify(token, process.env.jwt_salt);
     req.user = { uid: decodedToken.id }; // Attach user ID (or UID) to the request object
     next();
   } catch (error) {

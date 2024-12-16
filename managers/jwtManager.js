@@ -9,7 +9,8 @@ const jwtManager = (user) => {
 
   const accessToken = jsonwebtoken.sign(
     {
-      id: user.userId,
+      
+      id:user.userId,
       name: user.fullName,
       role: user.role,
     },

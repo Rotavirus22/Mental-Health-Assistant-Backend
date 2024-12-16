@@ -7,9 +7,16 @@ const cloudinary = require("../../utils/cloudinary");
 const uploadDoc = async (req,res) => {
 
     try{
-        const userId = req.user.uid;
+        const userId = req.user?.uid;
 
+        console.log(userId);
 
+        if(!userId){
+          return res.status(400).json({
+            status: "failed",
+            message: "user id required",
+          });
+        }
         if (!req.file) {
           return res.status(400).json({
             status: "failed",
@@ -35,6 +42,13 @@ const uploadDoc = async (req,res) => {
                   status: "failed",
                   message: "Unauthorized: Only doctors can upload documents.",
               });
+          }
+
+          if (userData.documentUrl && userData.documentUrl.trim() !== "") {
+            return res.status(400).json({
+              status: "failed",
+              message: "You have already uploaded a document.",
+            });
           }
           await userDocRef.update({
             documentUrl: result.secure_url, // Add the uploaded document's URL

@@ -40,7 +40,7 @@ const register = async (req, res) => {
     await newUserRef.set(createdUser);
   
     // Generate JWT token
-     const accessToken = jwtManager({ id: userId,fullName: fullName });
+     const accessToken = jwtManager({ userId: userId,fullName: fullName,role:role });
     
     res.status(201).json({
         status: "User registered successfully !!",
