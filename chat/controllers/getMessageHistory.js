@@ -13,34 +13,24 @@ const getChatHistory = async (req, res) => {
       });
     }
 
-    // Query for messages where senderId and receiverId match explicitly
     const messagesSnapshot = await db
       .collection("messages")
-      .where("senderId", "==", senderId)
-      .where("receiverId", "==", receiverId)
+      .where("senderId", "in", [senderId, receiverId])
+      .where("receiverId", "in", [senderId, receiverId])
       .orderBy("timestamp", "asc")
       .get();
 
-    const sentMessages = messagesSnapshot.docs.map((doc) => doc.data());
-
-    // Query for messages where receiverId is the sender and senderId is the receiver
-    const receivedMessagesSnapshot = await db
-      .collection("messages")
-      .where("senderId", "==", receiverId)
-      .where("receiverId", "==", senderId)
-      .orderBy("timestamp", "asc")
-      .get();
-
-    const receivedMessages = receivedMessagesSnapshot.docs.map((doc) => doc.data());
-
-    // Combine sent and received messages and sort them by timestamp
-    const allMessages = [...sentMessages, ...receivedMessages].sort(
-      (a, b) => a.timestamp.toMillis() - b.timestamp.toMillis()
-    );
+    const messages = messagesSnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        ...data,
+        isSender: data.senderId === senderId, // Add flag to indicate the sender
+      };
+    });
 
     return res.status(200).json({
       status: "success",
-      data: allMessages,
+      data: messages,
     });
   } catch (error) {
     console.error("Get Chat History Error:", error.message);
