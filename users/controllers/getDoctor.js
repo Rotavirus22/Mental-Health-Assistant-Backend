@@ -6,7 +6,7 @@ const getDoctors = async (req, res) => {
     const doctorsQuerySnapshot = await db
       .collection("users")
       .where("role", "==", "doctor")
-      .where("verified", "==", "true") // Add condition to filter only verified doctors
+      .where("verified", "==", "verified") // Add condition to filter only verified doctors
       .get();
 
     if (doctorsQuerySnapshot.empty) {
