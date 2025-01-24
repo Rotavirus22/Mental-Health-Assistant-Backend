@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 const adminRoute = require("./admin/admin.route");
 const doctorRoute = require("./doctors/doctor.route");
 const subscriptionRoute = require("./subscription/subscription.route");
+const chatRoute = require("./chat/chat.route");
 
 
 require("dotenv").config();
@@ -27,6 +28,7 @@ app.use("/api/pred",predictionRoute);
 app.use("/api/admin",adminRoute);
 app.use("/api/doctor",doctorRoute);
 app.use("/api/khalti",subscriptionRoute);
+app.use("/api/chat",chatRoute);
 
 db.collection('test').doc('testDoc').set({ initialized: true })
     .then(() => {
