@@ -20,13 +20,6 @@ const predictionn = async (req, res) => {
       .where('userId', '==', userId)
       .get();
 
-    if (!predictionQuery.empty) {
-      return res.status(403).json({
-        status: 'failed',
-        message: 'Prediction already exists. Delete previous to continue.',
-      });
-    }
-
     // Validate responses (Basic Check)
     if (!Array.isArray(responses) || responses.length === 0) {
       return res.status(400).json({
