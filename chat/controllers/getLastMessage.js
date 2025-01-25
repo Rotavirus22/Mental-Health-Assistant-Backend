@@ -50,6 +50,7 @@ const getChats = async (req, res) => {
       if (userSnapshot.exists) {
         const userData = userSnapshot.data();
         chatList.push({
+          id:userData.userId,
           name: userData.fullName || "Unknown User",
           lastMessage: chat.lastMessage,
           timestamp: chat.timestamp,
