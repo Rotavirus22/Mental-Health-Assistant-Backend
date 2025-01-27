@@ -6,10 +6,11 @@ const paymentFailure = require("./controllers/failedPayment");
 
 const subscriptionRoute = express.Router();
 
+subscriptionRoute.get("/success",paymentSuccess);
+subscriptionRoute.get("/failure", paymentFailure);
 subscriptionRoute.use(auth);
 
 subscriptionRoute.post("/check",checkSubscriptionAndInitiatePayment);
-subscriptionRoute.get("/success",paymentSuccess)
-subscriptionRoute.get("/failure", paymentFailure);
+
 
 module.exports = subscriptionRoute;
