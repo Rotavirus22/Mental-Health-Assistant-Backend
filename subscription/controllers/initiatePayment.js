@@ -1,13 +1,10 @@
-
-const {db} = require("../../database/firebase");
-
+const { db } = require("../../database/firebase");
 const { v4: uuidv4 } = require("uuid");
 
 const checkSubscriptionAndInitiatePayment = async (req, res) => {
   try {
-    const {doctorId } = req.body;
-
-    const {id: userId} = req.user;
+    const { doctorId } = req.body;
+    const { id: userId } = req.user;
 
     if (!userId || !doctorId) {
       return res.status(400).json({ error: "User ID and Doctor ID are required." });
@@ -42,9 +39,9 @@ const checkSubscriptionAndInitiatePayment = async (req, res) => {
       pdc: "0",
       scd: process.env.ESEWA_MERCHANT_CODE,
       pid: transactionId,
-      secret_key:process.env.SECRET_key,
-      su: `${process.env.BACKEND_URI}/api/payment/success?userId=${userId}&doctorId=${doctorId}`,
-      fu: `${process.env.BACKEND_URI}/api/payment/failure`,
+      secret_key: process.env.SECRET_KEY,
+      su: `${process.env.BACKEND_URI}/api/payment/success?userId=${userId}&doctorId=${doctorId}&transactionId=${transactionId}`,
+      fu: `${process.env.BACKEND_URI}/api/payment/failure?transactionId=${transactionId}`,
     };
 
     return res.json({
@@ -57,4 +54,5 @@ const checkSubscriptionAndInitiatePayment = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 module.exports = checkSubscriptionAndInitiatePayment;
