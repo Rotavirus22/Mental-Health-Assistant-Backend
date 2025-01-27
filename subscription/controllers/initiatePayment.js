@@ -35,21 +35,21 @@ const checkSubscriptionAndInitiatePayment = async (req, res) => {
     // User is not subscribed, initiate payment
     const transactionId = uuidv4();
     const esewaConfig = {
-      amount: doctorData.subscriptionFee,
-      total_amount: doctorData.subscriptionFee,
-      tax_amount: "0",
-      service_charge: "0",
-      delivery_charge: "0",
-      merchant_code: process.env.ESEWA_MERCHANT_CODE,
-      transaction_uuid: transactionId,
+      amt: doctorData.subscriptionFee,
+      tAmt: doctorData.subscriptionFee,
+      txAmt: "0",
+      psc: "0",
+      pdc: "0",
+      scd: process.env.ESEWA_MERCHANT_CODE,
+      pid: transactionId,
       secret_key:process.env.SECRET_key,
-      success_url: `${process.env.BACKEND_URI}/api/payment/success?userId=${userId}&doctorId=${doctorId}`,
-      failure_url: `${process.env.BACKEND_URI}/api/payment/failure`,
+      su: `${process.env.BACKEND_URI}/api/payment/success?userId=${userId}&doctorId=${doctorId}`,
+      fu: `${process.env.BACKEND_URI}/api/payment/failure`,
     };
 
     return res.json({
       message: "Payment required to subscribe to this doctor.",
-      paymentUrl: "https://esewa.com.np/epay/main",
+      paymentUrl: "https://rc.esewa.com.np/epay/main",
       esewaConfig,
     });
   } catch (error) {
