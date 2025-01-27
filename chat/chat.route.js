@@ -14,7 +14,7 @@ chatRoute.get("/receive/:receiverId",getChatHistory);
 chatRoute.get("/lastMessage",getChats);
 chatRoute.get("/notification",getChatsAndNotify);
 chatRoute.post("/markAsRead",markMessagesAsRead);
-chatRoute.post("notiRead",markNotificationAsRead);
+chatRoute.post("/notiRead",markNotificationAsRead);
 
 
 module.exports = chatRoute;

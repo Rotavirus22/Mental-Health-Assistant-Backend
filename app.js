@@ -27,7 +27,7 @@ app.use("/api/users", userRoute);
 app.use("/api/pred",predictionRoute);
 app.use("/api/admin",adminRoute);
 app.use("/api/doctor",doctorRoute);
-app.use("/api/khalti",subscriptionRoute);
+app.use("/api/payment",subscriptionRoute);
 app.use("/api/chat",chatRoute);
 
 db.collection('test').doc('testDoc').set({ initialized: true })
