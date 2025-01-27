@@ -3,7 +3,6 @@ require("express-async-errors");
 const express = require("express");
 const cors = require("cors");
 const errorHandlers = require("./handlers/errorHandlers");
-
 const {db} = require("./database/firebase");
 const userRoute = require("./users/users.route");
 const predictionRoute = require("./predictions/prediction.route");
@@ -12,6 +11,7 @@ const adminRoute = require("./admin/admin.route");
 const doctorRoute = require("./doctors/doctor.route");
 const subscriptionRoute = require("./subscription/subscription.route");
 const chatRoute = require("./chat/chat.route");
+const journalRoute = require("./journaling/journal.route");
 
 
 require("dotenv").config();
@@ -29,6 +29,7 @@ app.use("/api/admin",adminRoute);
 app.use("/api/doctor",doctorRoute);
 app.use("/api/payment",subscriptionRoute);
 app.use("/api/chat",chatRoute);
+app.use("/api/journal",journalRoute);
 
 db.collection('test').doc('testDoc').set({ initialized: true })
     .then(() => {
