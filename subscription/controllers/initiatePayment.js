@@ -42,6 +42,7 @@ const checkSubscriptionAndInitiatePayment = async (req, res) => {
       delivery_charge: "0",
       merchant_code: process.env.ESEWA_MERCHANT_CODE,
       transaction_uuid: transactionId,
+      secret_key:process.env.SECRET_key,
       success_url: `${process.env.BACKEND_URI}/api/payment/success?userId=${userId}&doctorId=${doctorId}`,
       failure_url: `${process.env.BACKEND_URI}/api/payment/failure`,
     };
