@@ -41,8 +41,9 @@ const getPaymentHistory = async (req, res) => {
       }
 
       paymentHistory.push({
-        id: doc.id,
+        paymentId: doc.id,
         doctorName,
+        doctorId:paymentData.doctorId,
         amount: paymentData.amount,
         paymentStatus: paymentData.paymentStatus,
         transactionId: paymentData.transactionId,
