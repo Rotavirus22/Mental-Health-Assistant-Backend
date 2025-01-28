@@ -13,14 +13,15 @@ const writeJournal = async (req, res) => {
     }
 
     const journalRef = db.collection("users").doc(userId).collection("journals");
-    const newJournal = {
-      id: journalDoc.id,
-      title: title,
-      content: content,
+
+    const journalDoc = await journalRef.add({
+      title,
+      content,
       createdAt: new Date(),
       updatedAt: new Date(),
-    };
-    const journalDoc = await journalRef.add(newJournal);
+    });
+
+    await journalRef.doc(journalDoc.id).update({ id: journalDoc.id });
 
     return res.status(200).json({
       status: "success",
