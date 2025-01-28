@@ -2,7 +2,7 @@ const { db } = require("../../database/firebase");
 
 const getPaymentsByDoctor = async (req, res) => {
   try {
-    const { doctorId } = req.user; // Assuming doctorId is retrieved from authentication
+    const { id: doctorId } = req.user; // Assuming doctorId is retrieved from authentication
 
     if (!doctorId) {
       return res.status(400).json({
