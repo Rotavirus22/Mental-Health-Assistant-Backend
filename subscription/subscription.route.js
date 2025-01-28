@@ -4,6 +4,7 @@ const checkSubscriptionAndInitiatePayment = require("./controllers/initiatePayme
 const paymentSuccess = require("./controllers/verifyPayment");
 const paymentFailure = require("./controllers/failedPayment");
 const getPaymentHistory = require("./controllers/paymentHistory");
+const getPaymentsByDoctor = require("./controllers/getPaymentByDoctor");
 
 const subscriptionRoute = express.Router();
 
@@ -14,6 +15,7 @@ subscriptionRoute.use(auth);
 
 subscriptionRoute.post("/check",checkSubscriptionAndInitiatePayment);
 subscriptionRoute.get("/history",getPaymentHistory);
+subscriptionRoute.get("/doctorHistory",getPaymentsByDoctor);
 
 
 module.exports = subscriptionRoute;
