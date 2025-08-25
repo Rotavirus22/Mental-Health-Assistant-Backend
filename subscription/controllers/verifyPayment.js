@@ -36,7 +36,7 @@ const paymentSuccess = async (req, res) => {
     });
 
     // Redirect to the frontend success page
-    res.redirect(`${process.env.FRONTEND_URL}/payment-success`);
+    res.redirect(`localhost:3000/payment-success`);
   } catch (error) {
     console.error("Error updating subscription:", error);
     res.status(500).json({ error: "Payment success handling failed." });
